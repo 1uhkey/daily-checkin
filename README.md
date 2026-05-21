@@ -48,7 +48,7 @@
 
 ```bash
 # 1. 克隆项目
-git clone <your-repo-url>
+git clone https://github.com/1uhkey/daily-checkin.git
 cd daily-checkin
 
 # 2. 安装依赖

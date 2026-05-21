@@ -3,7 +3,11 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from anthropic import Anthropic
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from anthropic import Anthropic
+
 from rich.console import Console
 
 from ..models.schemas import AnalyzedEntry, RawEntry

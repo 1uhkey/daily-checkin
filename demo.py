@@ -6,8 +6,13 @@
 
 from __future__ import annotations
 
+import sys
 import time
 from datetime import datetime
+
+# Windows 控制台强制 UTF-8，避免 emoji 乱码
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from src.models.schemas import (
     AnalyzedEntry,

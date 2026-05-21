@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import abc
 import time
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
-from anthropic import Anthropic
+if TYPE_CHECKING:
+    from anthropic import Anthropic
 
 
 class BaseAgent(abc.ABC):
@@ -14,7 +15,7 @@ class BaseAgent(abc.ABC):
     多 Agent 之间通过管道串联：Collector → Analyzer → Generator → Pusher。
     """
 
-    def __init__(self, client: Anthropic, model: str = "claude-sonnet-4-6"):
+    def __init__(self, client: "Anthropic", model: str = "claude-sonnet-4-6"):
         self.client = client
         self.model = model
 

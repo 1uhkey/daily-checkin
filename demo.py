@@ -30,11 +30,10 @@ def simulate_pipeline(user_input: str) -> OrchestrationResult:
     t0 = time.perf_counter()
 
     print("═══ Agent: Collector 开始采集 ═══")
-    # 模拟采集：按句号拆分作为独立事件
+    # 模拟采集：按中英文逗号/句号拆分为独立事件
     today = datetime.now().strftime("%Y-%m-%d")
-    parts = [p.strip() for p in user_input.replace("，", ",").replace("。", ".").split(".") if p.strip()]
-    if not parts:
-        parts = [p.strip() for p in user_input.replace("，", ",").split(",") if p.strip()]
+    text = user_input.replace("，", "|").replace("。", "|").replace(",", "|").replace(".", "|")
+    parts = [p.strip() for p in text.split("|") if p.strip()]
     if not parts:
         parts = [user_input]
 
@@ -82,7 +81,7 @@ def simulate_pipeline(user_input: str) -> OrchestrationResult:
 
         ae = AnalyzedEntry(
             raw=entry,
-            summary=entry.content[:20],
+            summary=entry.content[:50],
             mood=detected_mood,
             keywords=[k for k in mood_map if k in entry.content],
             highlight=any(kw in entry.content for kw in ["健身", "美食", "跑步", "电影", "川菜"]),
